@@ -2,112 +2,121 @@ package com.helloworld.babel.restaurant.model;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 public class Plato {
 
-	public enum Categoria {
-		PRIMER_PLATO ("Entrante"),
-		SEGUNDO_PLATO ("Plato principal"),
-		POSTRE ("Postre");
+    public enum Categoria {
+        PRIMER_PLATO("Entrante"),
+        SEGUNDO_PLATO("Plato principal"),
+        POSTRE("Postre");
 
-		private String descripcion;
+        @Schema(description = "Descripción de la categoría")
+        private String descripcion;
 
-		Categoria(String descripcion) {
-			this.descripcion = descripcion;
-		}
+        Categoria(String descripcion) {
+            this.descripcion = descripcion;
+        }
 
-		@JsonValue
-		public String getDescripcion() {
-			return descripcion;
-		}
+        @JsonValue
+        public String getDescripcion() {
+            return descripcion;
+        }
 
-		@JsonCreator
-		public static Categoria fromDescripcion(String descripcion) {
-			return switch (descripcion) {
-				case "Entrante" -> PRIMER_PLATO;
-				case "Plato principal" -> SEGUNDO_PLATO;
-				case "Postre" -> POSTRE;
-				default -> PRIMER_PLATO;
-			};
-		}
+        @JsonCreator
+        public static Categoria fromDescripcion(String descripcion) {
+            return switch (descripcion) {
+                case "Entrante" -> PRIMER_PLATO;
+                case "Plato principal" -> SEGUNDO_PLATO;
+                case "Postre" -> POSTRE;
+                default -> PRIMER_PLATO;
+            };
+        }
 
-	}
+    }
 
-	private Integer id;
-	private String nombre;
-	private double precio;
-	private Categoria categoria;
+    @Schema(description = "Identificador del plato")
+    private Integer id;
 
-	public Plato(Integer id, String nombre, double precio, Categoria categoria) {
-		this.id = id;
-		this.nombre = nombre;
-		this.precio = precio;
-		this.categoria = categoria;
-	}
+    @Schema(description = "Nombre del plato")
+    private String nombre;
 
-	public Integer getId() {
-		return id;
-	}
+    @Schema(description = "Precio del plato")
+    private double precio;
 
-	public String getNombre() {
-		return nombre;
-	}
+    @Schema(description = "Categoría del plato")
+    private Categoria categoria;
 
-	public double getPrecio() {
-		return precio;
-	}
+    public Plato(Integer id, String nombre, double precio, Categoria categoria) {
+        this.id = id;
+        this.nombre = nombre;
+        this.precio = precio;
+        this.categoria = categoria;
+    }
 
-	public Categoria getCategoria() {
-		return categoria;
-	}
+    public Integer getId() {
+        return id;
+    }
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+    public String getNombre() {
+        return nombre;
+    }
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
+    public double getPrecio() {
+        return precio;
+    }
 
-	public void setPrecio(double precio) {
-		this.precio = precio;
-	}
+    public Categoria getCategoria() {
+        return categoria;
+    }
 
-	public void setCategoria(Categoria categoria) {
-		this.categoria = categoria;
-	}
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-	public static Plato fromPlatoDAO(com.helloworld.babel.restaurant.daos.model.Plato plato) {
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
 
-		Categoria categoria = switch (plato.categoria()) {
-			case 1 -> Categoria.PRIMER_PLATO;
-			case 2 -> Categoria.SEGUNDO_PLATO;
-			case 3 -> Categoria.POSTRE;
-			default -> Categoria.PRIMER_PLATO;
-		};
+    public void setPrecio(double precio) {
+        this.precio = precio;
+    }
 
-		return new Plato(
-				plato.id(),
-				plato.nombre(),
-				plato.precio(),
-				categoria
-		);
-	}
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
+    }
 
-	public com.helloworld.babel.restaurant.daos.model.Plato toPlatoDAO() {
+    public static Plato fromPlatoDAO(com.helloworld.babel.restaurant.daos.model.Plato plato) {
 
-		int cat = switch (this.getCategoria()) {
-			case PRIMER_PLATO -> 1;
-			case SEGUNDO_PLATO -> 2;
-			case POSTRE -> 3;
-		};
+        Categoria categoria = switch (plato.categoria()) {
+            case 1 -> Categoria.PRIMER_PLATO;
+            case 2 -> Categoria.SEGUNDO_PLATO;
+            case 3 -> Categoria.POSTRE;
+            default -> Categoria.PRIMER_PLATO;
+        };
 
-		return new com.helloworld.babel.restaurant.daos.model.Plato(
-				this.getId(),
-				this.getNombre(),
-				this.getPrecio(),
-				cat
-		);
-	}
+        return new Plato(
+                plato.id(),
+                plato.nombre(),
+                plato.precio(),
+                categoria
+        );
+    }
+
+    public com.helloworld.babel.restaurant.daos.model.Plato toPlatoDAO() {
+
+        int cat = switch (this.getCategoria()) {
+            case PRIMER_PLATO -> 1;
+            case SEGUNDO_PLATO -> 2;
+            case POSTRE -> 3;
+        };
+
+        return new com.helloworld.babel.restaurant.daos.model.Plato(
+                this.getId(),
+                this.getNombre(),
+                this.getPrecio(),
+                cat
+        );
+    }
 
 }

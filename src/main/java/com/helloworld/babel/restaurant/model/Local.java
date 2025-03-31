@@ -1,73 +1,84 @@
 package com.helloworld.babel.restaurant.model;
 
 import com.helloworld.babel.restaurant.daos.model.Restaurante;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Local {
-	private String cif;
-	private String nombre;
-	private String direccion;
-	private String telefono;
-	private List<Plato> carta = new ArrayList<>();
 
-	public Local(String cif, String nombre, String direccion, String telefono) {
-		this.cif = cif;
-		this.nombre = nombre;
-		this.direccion = direccion;
-		this.telefono = telefono;
-	}
+    @Schema(description = "Identificador del local")
+    private String cif;
 
-	public String getCif() {
-		return cif;
-	}
+    @Schema(description = "Nombre del local")
+    private String nombre;
 
-	public String getNombre() {
-		return nombre;
-	}
+    @Schema(description = "Dirección del local")
+    private String direccion;
 
-	public String getDireccion() {
-		return direccion;
-	}
+    @Schema(description = "Teléfono del local")
+    private String telefono;
 
-	public String getTelefono() {
-		return telefono;
-	}
+    @Schema(description = "Carta del local")
+    private List<Plato> carta = new ArrayList<>();
 
-	public List<Plato> getCarta() {
-		return carta;
-	}
+    public Local(String cif, String nombre, String direccion, String telefono) {
+        this.cif = cif;
+        this.nombre = nombre;
+        this.direccion = direccion;
+        this.telefono = telefono;
+    }
 
-	public void setCif(String cif) {
-		this.cif = cif;
-	}
+    public String getCif() {
+        return cif;
+    }
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
+    public String getNombre() {
+        return nombre;
+    }
 
-	public void setDireccion(String direccion) {
-		this.direccion = direccion;
-	}
+    public String getDireccion() {
+        return direccion;
+    }
 
-	public void setTelefono(String telefono) {
-		this.telefono = telefono;
-	}
+    public String getTelefono() {
+        return telefono;
+    }
 
-	public void addPlato(Plato plato) {
-		carta.add(plato);
-	}
+    public List<Plato> getCarta() {
+        return carta;
+    }
 
-	public static Local fromRestaurante(Restaurante restaurante) {
-		return new Local(
-				restaurante.cif(),
-				restaurante.nombre(),
-				restaurante.direccion(),
-				restaurante.telefono());
-	}
+    public void setCif(String cif) {
+        this.cif = cif;
+    }
 
-	public Restaurante toRestaurante() {
-		return new Restaurante(cif, nombre, direccion, telefono);
-	}
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+
+    public void addPlato(Plato plato) {
+        carta.add(plato);
+    }
+
+    public static Local fromRestaurante(Restaurante restaurante) {
+        return new Local(
+                restaurante.cif(),
+                restaurante.nombre(),
+                restaurante.direccion(),
+                restaurante.telefono());
+    }
+
+    public Restaurante toRestaurante() {
+        return new Restaurante(cif, nombre, direccion, telefono);
+    }
 }
