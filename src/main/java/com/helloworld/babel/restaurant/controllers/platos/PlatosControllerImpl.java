@@ -3,8 +3,8 @@ package com.helloworld.babel.restaurant.controllers.platos;
 import com.helloworld.babel.restaurant.model.Plato;
 import com.helloworld.babel.restaurant.servicios.platos.PlatosService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -35,11 +35,7 @@ public class PlatosControllerImpl implements PlatosController {
             responses = {
                     @ApiResponse(description = "La lista de platos",
                             content = @Content(mediaType = "*/*",
-                                    schema = @Schema(implementation = Plato.class),
-                                    examples = {
-                                            @ExampleObject(name = "Plato de ejemplo",
-                                                    value = "[\n  {\n    id: 1,\n    nombre: \"Croquetas de jamón\",\n    precio: 8.5,\n    categoria: \"Entrante\"\n  }\n]",
-                                                    summary = "Ejemplo de un plato de la lista")}))})
+                                    array = @ArraySchema(schema = @Schema(implementation = Plato.class))))})
     public List<Plato> getPlatos() {
         List<Plato> platos = platosService.getPlatos();
         return platos;
