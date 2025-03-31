@@ -1,0 +1,425 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "OpenAPI definition",
+    "version": "v0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8080",
+      "description": "Generated server url"
+    }
+  ],
+  "paths": {
+    "/restaurante/platos/{id}": {
+      "get": {
+        "tags": [
+          "platos-controller-impl"
+        ],
+        "summary": "Obtiene un plato",
+        "operationId": "getPlatosById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Plato"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "platos-controller-impl"
+        ],
+        "summary": "Actualiza un plato",
+        "operationId": "updatePlato",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Plato"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "platos-controller-impl"
+        ],
+        "summary": "Elimina un plato",
+        "operationId": "deletePlato",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/restaurante/locales/{cif}": {
+      "get": {
+        "tags": [
+          "locales-controller-impl"
+        ],
+        "summary": "Obtiene un local",
+        "operationId": "getLocalByCif",
+        "parameters": [
+          {
+            "name": "cif",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Local"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "locales-controller-impl"
+        ],
+        "summary": "Actualiza un local",
+        "operationId": "createOrUpdateLocal",
+        "parameters": [
+          {
+            "name": "cif",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Local"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "locales-controller-impl"
+        ],
+        "summary": "Elimina un local",
+        "operationId": "deleteLocal",
+        "parameters": [
+          {
+            "name": "cif",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/restaurante/platos": {
+      "get": {
+        "tags": [
+          "platos-controller-impl"
+        ],
+        "summary": "Listado de platos",
+        "operationId": "getPlatos",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Plato"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "platos-controller-impl"
+        ],
+        "summary": "Añade un plato",
+        "operationId": "createPlato",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Plato"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int64"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/restaurante/locales/{cif}/platos": {
+      "get": {
+        "tags": [
+          "locales-controller-impl"
+        ],
+        "summary": "Listado de platos de un local",
+        "operationId": "getPlatos_1",
+        "parameters": [
+          {
+            "name": "cif",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Plato"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "locales-controller-impl"
+        ],
+        "summary": "Añade un plato a la carta de un local",
+        "operationId": "addPlato",
+        "parameters": [
+          {
+            "name": "cif",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/restaurante/locales": {
+      "get": {
+        "tags": [
+          "locales-controller-impl"
+        ],
+        "summary": "Listado de locales",
+        "operationId": "getLocales",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Local"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/restaurante/locales/{cif}/platos/{plato}": {
+      "delete": {
+        "tags": [
+          "locales-controller-impl"
+        ],
+        "summary": "Elimina un plato de la carta de un local",
+        "operationId": "removePlato",
+        "parameters": [
+          {
+            "name": "cif",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "plato",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Plato": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Identificador del plato"
+          },
+          "nombre": {
+            "type": "string",
+            "description": "Nombre del plato"
+          },
+          "precio": {
+            "type": "number",
+            "format": "double",
+            "description": "Precio del plato"
+          },
+          "categoria": {
+            "type": "string",
+            "description": "Categoría del plato",
+            "enum": [
+              "Entrante",
+              "Plato principal",
+              "Postre"
+            ]
+          }
+        }
+      },
+      "Local": {
+        "type": "object",
+        "properties": {
+          "cif": {
+            "type": "string",
+            "description": "Identificador del local"
+          },
+          "nombre": {
+            "type": "string",
+            "description": "Nombre del local"
+          },
+          "direccion": {
+            "type": "string",
+            "description": "Dirección del local"
+          },
+          "telefono": {
+            "type": "string",
+            "description": "Teléfono del local"
+          },
+          "carta": {
+            "type": "array",
+            "description": "Carta del local",
+            "items": {
+              "$ref": "#/components/schemas/Plato"
+            }
+          }
+        }
+      }
+    }
+  }
+}
